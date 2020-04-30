@@ -2,19 +2,17 @@ import React, { Component } from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 import { Link } from 'react-router-dom'
-
+import PropTypes from 'prop-types';
 
 class BookSearch extends Component {
     state = {
-
         books: []
     }
 
     change = (q) => {
-
         BooksAPI.search(q).then((it) => {
             if (it instanceof Array) {
-
+                it.map((a) => { a.shelf = 'none'; return a })
                 this.setState(() => ({
                     books: it
                 }))
@@ -30,16 +28,16 @@ class BookSearch extends Component {
 
     render() {
         const { booksaved, changeCategory } = this.props
-        const temp1 = this.state.books.map((b1) => {b1.shelf = "none"; return b1})
-        console.log(temp1.map(t=>t.shelf))
-        const booksUpdated = temp1.map((b1) => {
-            booksaved.map((b2) => {
-                if (b1.id === b2.id) {
-                    b1.shelf = b2.shelf
-                }
+        const booksUpdated = (this.state.books.length > 0)
+            ? this.state.books.map((b1) => {
+                booksaved.map((b2) => {
+                    if (b1.id === b2.id) {
+                        b1.shelf = b2.shelf
+                    }
+                })
+                return b1
             })
-            return b1
-        })
+            : this.state.books
         return (
             <div className="search-books">
 
@@ -89,3 +87,8 @@ class BookSearch extends Component {
 }
 
 export default BookSearch
+
+BookSearch.propTypes = {
+    booksaved: PropTypes.array.isRequired, 
+    changeCategory:PropTypes.func.isRequired,
+}

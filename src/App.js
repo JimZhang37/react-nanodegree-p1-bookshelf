@@ -19,12 +19,12 @@ class BooksApp extends React.Component {
 
     changeCategory = (book, category) => {
         this.setState((state) => {
-            if (state.books.map(it => it.id).includes(book.id)){
-                return {books: state.books.map(it => {if(it.id ===book.id){it.shelf = category} return it})}
+            if (state.books.some(it => it.id===book.id)){
+                return {books: state.books.map(it => (it.id ===book.id)?{...it, shelf:category}:it)}
             }
             else{
                 book.shelf = category
-                return {books: state.books.push(book)}
+                return {books: state.books.concat([book])}
             }
         }
         
@@ -33,8 +33,11 @@ class BooksApp extends React.Component {
         
     }
     render() {
+        console.log('reander from app.js', this.state.books)
         return (
+            
             <div className="app">
+                
                 <Route exact path='/' render={() => (<Books books={this.state.books} changeCategory={this.changeCategory} />)} />
                 <Route exact path='/Search' render={() => (<Search booksaved={this.state.books} changeCategory={this.changeCategory} />)} />
             </div>
