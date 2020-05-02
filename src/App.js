@@ -33,7 +33,7 @@ class BooksApp extends React.Component {
         
     }
     render() {
-        console.log('reander from app.js', this.state.books)
+        // console.log('reander from app.js', this.state.books)
         return (
             
             <div className="app">
