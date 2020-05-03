@@ -1,6 +1,9 @@
 # MyReads: A Book Tracking App
 This is the first project for React Nanodegree from Udacity. It's the froneend for a book tracking app. User of this app can put a book in the following three categories: Reading, want to read and read. The backend API is provided by Udacity, "https://reactnd-books-api.udacity.com". User is able to search new books that could be put into one of the three categories mentioned above.
 
+# timeline
+3 May 2020, this project is passed. 
+
 # How to install
 In the project folder, where package.json is located, please run `npm i`
 
@@ -41,3 +44,8 @@ this.setState((state) => {
 ```
 A few useful functions are listed here:
 map, filter, some, ternary operator, concat and spread operator
+
+# Lifecycle event 
+componentDidMount() and componentDidUpdate() are two lifecycle events that I used in this toy project. In componentDidMount(), data is fetched from backend. When a search query needs to be posted to backend, componentDidUpdate() is used.
+
+In componentDidUpdate(), parameters can be used to compare prevState and prevProps and current state props, so it can fetch data from backend and change state only when the current state/props are different.
